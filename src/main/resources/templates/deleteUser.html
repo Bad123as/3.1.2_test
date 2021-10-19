@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+
+
+<h1>Users</h1>
+<br>
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    <tr th:each="User: ${users}">
+        <td th:utext="${User.name}">name</td>
+        <td><form th:method="POST" th:action="@{/{id}/delete(id=${User.getId()})}">
+            <input type="submit" value="Delete"/>
+        </form></td>
+
+    </tr>
+
+</table>
+
+<br>
+
+<input type="button" value="Add"
+       onClick="window.location.href = 'new'"/>
+</body>
+</html>
